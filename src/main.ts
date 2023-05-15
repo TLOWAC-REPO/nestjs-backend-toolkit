@@ -9,7 +9,7 @@ import path from "path";
 import { WinstonModule } from 'nest-winston';
 
 import { AppModule } from "./app.module";
-import { Swagger, winstonTransportConsoleOption } from "@/config";
+import { Swagger, winstonTransportConsoleOption, winstonTransportFileOption } from "@/config";
 import { printBootBanner } from "@/common/utils"
 
 class ExpressServer {
@@ -48,6 +48,9 @@ class ExpressServer {
                         logger: WinstonModule.createLogger({
                                 transports: [
                                         winstonTransportConsoleOption,
+                                        winstonTransportFileOption({ type: "info" }),
+                                        winstonTransportFileOption({ type: "error" })
+
                                 ],
                         })
                 });
