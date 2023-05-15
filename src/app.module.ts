@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CustomConfigModule } from '@/provider';
+import { CustomConfigModule, PrismaModule } from '@/provider';
 
 
 @Module({
-        imports: [CustomConfigModule],
+        imports: [CustomConfigModule, PrismaModule],
         controllers: [AppController],
         providers: [AppService],
 })
