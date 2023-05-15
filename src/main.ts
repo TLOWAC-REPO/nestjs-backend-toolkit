@@ -6,9 +6,10 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import path from "path";
+import { WinstonModule } from 'nest-winston';
 
 import { AppModule } from "./app.module";
-import { Swagger } from "@/config";
+import { Swagger, winstonTransportConsoleOption } from "@/config";
 import { printBootBanner } from "@/common/utils"
 
 class ExpressServer {
@@ -43,9 +44,15 @@ class ExpressServer {
         }
 
         public async setup() {
-                this.app = await NestFactory.create<NestExpressApplication>(AppModule);
-                this.app.setGlobalPrefix("api");
+                this.app = await NestFactory.create<NestExpressApplication>(AppModule, {
+                        logger: WinstonModule.createLogger({
+                                transports: [
+                                        winstonTransportConsoleOption,
+                                ],
+                        })
+                });
                 this.app.enableVersioning({ type: VersioningType.URI, prefix: "v", defaultVersion: '1' });
+                this.app.setGlobalPrefix("api");
 
                 this.config = this.app.get(ConfigService);
                 this.swagger = new Swagger(this.app);
