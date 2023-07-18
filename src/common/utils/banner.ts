@@ -1,9 +1,9 @@
-import gradient from "gradient-string";
+import gradient from 'gradient-string';
 
 export function printBootBanner() {
-  const coolGradient = gradient("red", "blue", "green", "orange");
+        const coolGradient = gradient('red', 'blue', 'green', 'orange');
 
-  const coolString = coolGradient(String.raw`
+        const coolString = coolGradient(String.raw`
 
   /$$$$$$$$ /$$        /$$$$$$  /$$      /$$  /$$$$$$   /$$$$$$ 
  |__  $$__/| $$       /$$__  $$| $$  /$ | $$ /$$__  $$ /$$__  $$
@@ -17,5 +17,5 @@ export function printBootBanner() {
                                             Made By ChangHun Lee
       `);
 
-  return coolString;
+        return coolString;
 }
